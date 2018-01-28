@@ -1,0 +1,63 @@
+<div class="animated fadeIn">
+  <div class="card card-primary card-inverse">
+    <div class="card-header text-center">
+      <strong>Your Wallet</strong>
+    </div>
+    <div class="card-block">
+      <div class="text-center">
+        <h1>0</h1>
+        <strong>{{company.coin.code}}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <div class="card">
+        <div class="card-header text-center">
+          <strong>Address</strong>
+        </div>
+        <div class="card-block">
+          <div class="text-center">
+            <p>Send {{company.coin.code}} to the below address to receive them to your secure web wallet</p>
+            <input class="form-control text-center font-xl" readonly placeholder="COMING SOON" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-12">
+      <div class="card">
+        <div class="card-header text-center">
+          <strong>Send {{company.coin.code}}</strong>
+        </div>
+        <div class="card-block">
+          <div class="text-center">
+            <p>Enter an address to send your {{company.coin.code}} to</p>
+            <input class="form-control text-center mb-1 font-xl" placeholder="Address" />
+
+            <button class="btn btn-success" disabled>Coming Soon</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-12" *ngFor="let currency of currencies">
+      <div class="card">
+        <div class="card-header text-center">
+          <img style="height:22px" [src]="currency.logo" />
+          <strong style="vertical-align: middle;">{{currency.code}} - {{currency.name}}</strong>
+        </div>
+
+        <div class="card-block text-center">
+          <p *ngIf="currency.balance != -1"><strong>Balance: {{currency.balance}}</strong></p>
+          <p *ngIf="currency.balance == -1"><strong>Not yet supported</strong></p>
+
+          <p style="margin-bottom: 5px;">Address</p>
+          <input class="form-control text-center" readonly placeholder="COMING SOON" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

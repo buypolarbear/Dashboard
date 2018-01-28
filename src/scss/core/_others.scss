@@ -1,0 +1,18 @@
+hr.transparent {
+  border-top: 1px solid transparent;
+}
+
+.error-display {
+  color: $brand-danger;
+  margin: 10px 0;
+}
+
+.success-display {
+  color: $brand-success;
+  margin: 10px 0;
+}
+
+.warning-display {
+  color: $brand-warning;
+  margin: 10px 0;
+}

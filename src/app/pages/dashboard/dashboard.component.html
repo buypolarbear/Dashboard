@@ -1,0 +1,105 @@
+<div class="animated fadeIn">
+
+  <div class="alert alert-info">The below data is for demonstration purposes only and is not linked to your account in any way.</div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card card-inverse card-transparent">
+        <div class="card-block pb-0">
+          <div class="btn-group float-right" dropdown placement="bottom right">
+            <button type="button" class="btn btn-transparent dropdown-toggle px-1" dropdownToggle>
+              <i class="icon-settings"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+              <a class="dropdown-item" (click)="convertBalances(currency)" tabindex [ngClass]="{active: convertedCurrency?.code === currency.code}" *ngFor="let currency of acceptedConversions">{{currency.code}}</a>
+            </div>
+          </div>
+          <h4 class="mb-0">{{convertedCurrency?.symbol}}0.00 {{convertedCurrency?.code}}</h4>
+          <p>Approximate wallet value over last 7 days in {{convertedCurrency?.code}}</p>
+        </div>
+        <div class="chart-wrapper px-1" style="height:300px;">
+          <canvas baseChart class="chart" *ngIf="walletValueHistory[convertedCurrency?.code]"
+          [datasets]="walletValueHistory[convertedCurrency?.code]"
+          [labels]="topChartLabels"
+          [options]="topChartOptions"
+          [colors]="chartStyling"
+          legend="false"
+          chartType="line"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card card-inverse card-transparent">
+        <div class="card-block pb-0">
+          <h4 class="mb-0">Holdings</h4>
+          <p>Portfolio amounts</p>
+        </div>
+        <div class="chart-wrapper px-1" style="height:300px;">
+          <canvas baseChart #holdingsChart class="chart chart-doughnut" *ngIf="convertedCurrency"
+          [datasets]="portfolioHoldingsData"
+          [labels]="portfolioHoldingsLabels"
+          [options]="portfolioHoldingsOptions"
+          [colors]="chartStyling"
+          legend="false"
+          chartType="doughnut"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card card-inverse card-transparent">
+        <div class="card-block pb-0">
+          <h4 class="mb-0">Spendings</h4>
+          <p>Most used for transactions</p>
+        </div>
+        <div class="chart-wrapper px-1" style="height:300px;">
+          <canvas baseChart class="chart chart-doughnut" *ngIf="convertedCurrency"
+          [datasets]="spendingsData"
+          [labels]="spendingsLabel"
+          [options]="spendingsOptions"
+          [colors]="chartStyling"
+          legend="false"
+          chartType="doughnut"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card card-transparent card-inverse">
+    <div class="card-block">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="card-title">Overview</h4>
+          <p>Last 30 days spending in {{convertedCurrency?.code}}</p>
+        </div>
+      </div>
+      <div class="chart-wrapper" style="height:300px;margin-top:40px;">
+        <canvas baseChart class="chart" *ngIf="mainChartData[convertedCurrency?.code]"
+        [datasets]="mainChartData[convertedCurrency?.code]"
+        [labels]="mainChartLabels"
+        [options]="mainChartOptions"
+        [colors]="chartStyling"
+        legend="false"
+        chartType="line"></canvas>
+      </div>
+    </div>
+    <div class="card-footer" *ngIf="tradeHistory">
+      <ul>
+        <li>
+          <div>Total Profitable <span class="hidden-sm-down">Trades</span></div>
+          <strong>{{profitableTrades}} trades ({{profitableTrades/closedTrades*100 | number:'1.2-2'}}%)</strong>
+        </li>
+        <li>
+          <div>Total Unprofitable <span class="hidden-sm-down">Trades</span></div>
+          <strong>{{unprofitableTrades}} trades ({{unprofitableTrades/closedTrades*100 | number:'1.2-2'}}%)</strong>
+        </li>
+      </ul>
+      <div class="progress mt-1">
+        <div class="progress-bar bg-success" role="progressbar" [style.width.%]="profitableTrades/closedTrades*100"></div>
+        <div class="progress-bar bg-danger" role="progressbar" [style.width.%]="unprofitableTrades/closedTrades*100"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<canvas style="display:none;" #canvasGradient id="canvas-gradient"></canvas>

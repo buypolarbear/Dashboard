@@ -1,0 +1,97 @@
+<header class="app-header navbar">
+  <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">&#9776;</button>
+  <a class="navbar-brand" href="#">
+    <img [src]="logo" class="img-fluid" alt="MoxyOne" />
+  </a>
+
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown hidden-md-down" dropdown placement="bottom right">
+      <a class="nav-link nav-pill" data-toggle="dropdown" tabindex role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
+        <i class="icon-bell"></i>
+        <!--<span class="badge badge-pill badge-danger">1</span>-->
+      </a>
+      <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
+
+        <div class="dropdown-header text-center"><strong>Notifications</strong></div>
+
+        <a class="dropdown-item">
+          <i class="icon-info text-info"></i> There are no notifications yet
+        </a>
+      </div>
+    </li>
+    <li class="nav-item dropdown mr-md-1" *ngIf="userData?.picture" dropdown placement="bottom right">
+      <a class="nav-link nav-pill avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
+        <img [src]="userData?.picture" class="img-avatar">
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <a class="dropdown-item" [routerLink]="['/dashboard/account-settings']"><i class="icon-settings"></i> Settings</a>
+        <button class="dropdown-item" (click)="logout()"><i class="icon-logout"></i> Logout</button>
+      </div>
+    </li>
+  </ul>
+</header>
+
+<div class="app-body">
+  <div class="sidebar" id="main-sidebar">
+    <nav class="sidebar-nav">
+      <ul class="nav">
+        <li class="nav-title text-center">
+          <span>Dashboard</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> Overview</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard/wallet']"><i class="icon-wallet"></i> Wallet</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard/transactions']"><i class="icon-list"></i> Transactions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard/my-card']"><i class="icon-credit-card"></i> My Card <span class="badge badge-primary">DEMO</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="icon-shuffle"></i> Transfers <span class="badge badge-info">COMING SOON</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="icon-present"></i> Rewards <span class="badge badge-info">COMING SOON</span></a>
+        </li>
+
+        <li class="divider"></li>
+
+        <li class="nav-title text-center">
+          <span>Support</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard/contact']"><i class="icon-envelope"></i> Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard/faqs']"><i class="icon-question"></i> FAQs</a>
+        </li>
+
+        <li class="divider"></li>
+
+        <li class="nav-title text-center">
+          <span>Account</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard/account-settings']"><i class="icon-settings"></i> Account Settings</a>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" (click)="logout()"><i class="icon-logout"></i> Logout</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <main class="main w-100">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+
+<footer class="app-footer hidden-sm-down">
+  &copy; 2018 {{company.name}} Pty Ltd - ABN <a href="https://abr.business.gov.au/SearchByAbn.aspx?SearchText=91623132785" target="_blank">91 623 132 785</a> - All Rights Reserved
+</footer>

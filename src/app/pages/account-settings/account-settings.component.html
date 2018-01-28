@@ -1,0 +1,63 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Personal Details</strong>
+        </div>
+
+        <div class="card-block">
+          <div class="row">
+            <div class="col-sm-12">
+              <form novalidate *ngIf="userDataForm" [formGroup]="userDataForm">
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" formControlName="email" id="email" disabled readonly placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                  <label for="full-name">Full name</label>
+                  <input type="text" class="form-control" formControlName="fullName" id="full-name" disabled readonly placeholder="Full name">
+                </div>
+
+                <div class="form-group">
+                  <label for="full-name">Redidential address</label>
+                  <input type="text" class="form-control" formControlName="resAddress" id="full-name" disabled readonly placeholder="Full residential address">
+                </div>
+
+                <div class="form-group">
+                  <label for="full-name">Country</label>
+
+                  <select class="form-control" formControlName="country" id="full-name" disabled readonly placeholder="Full residential address">
+                    <option *ngFor="let country of supportedCountries" [value]="country[0]">{{country[1]}}</option>
+                  </select>
+                </div>
+
+                <div class="alert alert-info">Details can be updated after the token sale has closed.</div>
+
+                <button class="btn btn-success" type="button" disabled>Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Change password</strong>
+        </div>
+
+        <div class="card-block">
+          <p>To change your password, click on the below button to request a password change link to your email address.</p>
+
+          <div class="success-display" *ngIf="changePasswordSuccess">{{changePasswordSuccess}}</div>
+          <div class="error-display" *ngIf="changePasswordError">{{changePasswordError}}</div>
+
+          <button class="btn btn-success" type="button" (click)="requestPasswordChange()" [ladda]="changePasswordPending" data-style="expand-right" [disabled]="changePasswordPending">Request change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

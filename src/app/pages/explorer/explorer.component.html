@@ -1,0 +1,39 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-block">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Enter address or transaction ID">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="button">Search</button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <strong>Latest Transactions</strong>
+    </div>
+    <div class="card-block">
+      <div *ngIf="transactions.length === 0">
+        There are no transactions yet
+      </div>
+
+      <table class="table" *ngIf="transactions.length > 0">
+        <thead>
+          <th>Transaction</th>
+          <th>Date</th>
+          <th>Block</th>
+          <th>Amount</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of transactions">
+            <td>{{transaction.txid}}</td>
+            <td>{{transaction.date | date}}</td>
+            <td>{{transaction.block}}</td>
+            <td>{{transaction.amount}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
