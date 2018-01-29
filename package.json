@@ -9,8 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build -prod --base-href /dist/",
-    "install": "npm install",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint"
   },
